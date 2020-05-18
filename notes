@@ -3,4 +3,5 @@ https://docs.gitlab.com/ee/gitlab-basics/create-project.html
 gitlab operations on ipv6 very slow, use -4
 
 https://testdriven.io/courses/tdd-django/continuous-integration/
-need to use gitlab-runner run --config .gitlab-ci.yml
+try git push --set-upstream git@gitlab.com:gopicci/django-tdd-docker.git master -v -4
+or might need to use gitlab-runner run --config .gitlab-ci.yml
