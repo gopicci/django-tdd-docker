@@ -30,18 +30,12 @@ test:
   services:
     - postgres:latest
   variables:
-    POSTGRES_DB: movies_dev
+    POSTGRES_DB: users
     POSTGRES_USER: runner
     POSTGRES_PASSWORD: runner
-    DATABASE_TEST_URL: postgres://runner:runner@postgres:5432/movies_dev
-    SQL_ENGINE: django.db.backends.postgresql
-    SQL_DATABASE: movies_dev
-    SQL_USER: runner
-    SQL_PASSWORD: runner
-    SQL_HOST: postgres
-    SQL_PORT: 5432
-    DATABASE: postgres
+    DATABASE_URL: postgres://runner:runner@postgres:5432/users
   script:
+    - python manage.py migrate
     - cd app
     - pytest -p no:warnings --cov=.
     - flake8 .
