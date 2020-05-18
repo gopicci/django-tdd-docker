@@ -36,7 +36,9 @@ test:
     DATABASE_URL: postgres://runner:runner@postgres:5432/users
   script:
     - cd app
+    - python manage.py makemigrations
     - python manage.py migrate
+    - python manage.py loaddata movies.json
     - pytest -p no:warnings --cov=.
     - flake8 .
     - black --check --exclude=env .
