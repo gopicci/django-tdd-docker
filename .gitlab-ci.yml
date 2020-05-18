@@ -41,5 +41,4 @@ test:
     - python manage.py loaddata movies.json
     - pytest -p no:warnings --cov=.
     - flake8 .
-    - black --check --exclude=env .
     - isort ./*/*.py --check-only
