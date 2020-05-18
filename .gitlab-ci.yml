@@ -35,8 +35,8 @@ test:
     POSTGRES_PASSWORD: runner
     DATABASE_URL: postgres://runner:runner@postgres:5432/users
   script:
-    - python manage.py migrate
     - cd app
+    - python manage.py migrate
     - pytest -p no:warnings --cov=.
     - flake8 .
     - black --check --exclude=env .
