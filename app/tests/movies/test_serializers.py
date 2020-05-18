@@ -3,9 +3,9 @@ from movies.serializers import MovieSerializer
 
 def test_valid_movie_serializer():
     valid_serializer_data = {
-        'title': 'Ciao bella',
-        'genre': 'comedy',
-        'year': '1952',
+        "title": "Ciao bella",
+        "genre": "comedy",
+        "year": "1952",
     }
     serializer = MovieSerializer(data=valid_serializer_data)
     assert serializer.is_valid()
@@ -16,8 +16,8 @@ def test_valid_movie_serializer():
 
 def test_invalid_movie_serializer():
     invalid_serializer_data = {
-        'title': 'Ciao bella',
-        'genre': 'comedy',
+        "title": "Ciao bella",
+        "genre": "comedy",
     }
     serializer = MovieSerializer(data=invalid_serializer_data)
     assert not serializer.is_valid()
