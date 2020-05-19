@@ -34,11 +34,13 @@ test:
     POSTGRES_DB: users
     POSTGRES_USER: runner
     POSTGRES_PASSWORD: runner
-    DATABASE_TEST_URL: postgres://runner:runner@postgres:5432/users
+    DATABASE_URL: postgres://runner:runner@postgres:5432/users
   script:
     - cd app
     - python3.8 -m venv env
     - source env/bin/activate
+    - python manage.py makemigrations
+    - python manage.py migrate
     - pip install -r requirements.txt
     - pip install black flake8 isort pytest pytest-django
     - pytest -p no:warnings
