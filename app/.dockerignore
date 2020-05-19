@@ -1,2 +1,6 @@
-.coveragerc
+env
+.dockerignore
+Dockerfile
+Dockerfile.prod
+.coverage
 app/htmlcov
