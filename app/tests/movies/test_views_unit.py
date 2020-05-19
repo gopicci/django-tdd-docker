@@ -1,7 +1,5 @@
 import pytest
 from django.http import Http404
-from rest_framework import status
-from rest_framework.response import Response
 from movies.models import Movie
 from movies.views import MovieViewSet
 from movies.serializers import MovieSerializer
