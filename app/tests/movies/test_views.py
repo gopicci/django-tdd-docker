@@ -9,7 +9,7 @@ def test_add_movie(client):
 
     resp = client.post(
         "/api/movies/",
-        {"title": "Ciuruma", "genre": "horror", "year": "2018", },
+        {"title": "Ciuruma", "genre": "horror", "year": "2018",},
         content_type="application/json",
     )
     assert resp.status_code == 201
@@ -38,7 +38,7 @@ def test_add_movie_invalid_json_keys(client):
 
     resp = client.post(
         "/api/movies/",
-        {"title": "Ciuruma", "genre": "horror", },
+        {"title": "Ciuruma", "genre": "horror",},
         content_type="application/json",
     )
     assert resp.status_code == 400

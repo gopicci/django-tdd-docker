@@ -11,3 +11,7 @@ issues from testdriven.io:
 contrary to the first
 - gitlab-ci config database url variable is different than django settings one
 - gitlab-ci test failing without migrations
+
+
+
+image size, compressed pre multistage 150
