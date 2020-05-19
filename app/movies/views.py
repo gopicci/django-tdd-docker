@@ -1,5 +1,4 @@
 from django.http import Http404
-from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -40,14 +39,19 @@ class MovieDetail(APIView):
 class MovieViewSet(ViewSet):
     lookup_value_regex = r"\d+"
 
+    def get_object(self, pk):
+        try:
+            return Movie.objects.get(pk=pk)
+        except Movie.DoesNotExist:
+            raise Http404
+
     def list(self, request):
         queryset = Movie.objects.all()
         serializer = MovieSerializer(queryset, many=True)
         return Response(serializer.data)
 
     def retrieve(self, request, pk, format=None):
-        queryset = Movie.objects.all()
-        movie = get_object_or_404(queryset, pk=pk)
+        movie = self.get_object(pk)
         serializer = MovieSerializer(movie)
         return Response(serializer.data)
 
@@ -59,14 +63,12 @@ class MovieViewSet(ViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk, format=None):
-        queryset = Movie.objects.all()
-        movie = get_object_or_404(queryset, pk=pk)
+        movie = self.get_object(pk)
         movie.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     def put(self, request, pk, format=None):
-        queryset = Movie.objects.all()
-        movie = get_object_or_404(queryset, pk=pk)
+        movie = self.get_object(pk)
         serializer = MovieSerializer(movie, data=request.data)
         if serializer.is_valid():
             serializer.save()
