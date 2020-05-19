@@ -38,8 +38,6 @@ test:
     DATABASE_URL: postgres://runner:runner@postgres:5432/users
   script:
     - cd app
-    - python manage.py makemigrations
-    - python manage.py migrate
     - python3.8 -m venv env
     - source env/bin/activate
     - pip install -r requirements.txt
@@ -57,7 +55,7 @@ deploy:
     - docker:dind
   variables:
     DOCKER_DRIVER: overlay2
-    HEROKU_APP_NAME: limitless-eyrie-70707
+    HEROKU_APP_NAME: stark-headland-84690
     HEROKU_REGISTRY_IMAGE: registry.heroku.com/${HEROKU_APP_NAME}/web
   script:
     - apk add --no-cache curl
@@ -65,6 +63,7 @@ deploy:
     - docker build
         --tag $HEROKU_REGISTRY_IMAGE
         --file ./Dockerfile.prod
+        --build-arg SECRET_KEY=$SECRET_KEY
         "."
     - docker login -u _ -p $HEROKU_AUTH_TOKEN registry.heroku.com
     - docker push $HEROKU_REGISTRY_IMAGE
