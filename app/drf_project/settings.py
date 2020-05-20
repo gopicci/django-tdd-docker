@@ -52,10 +52,7 @@ if not DEBUG:
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
     SECURE_REFERRER_POLICY = "same-origin"
     REST_FRAMEWORK = {
-        "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",
-                                     "renderers.OpenAPIRenderer",
-                                     "renderers.SwaggerUIRenderer",
-                                     )
+        "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer")
     }
 
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
