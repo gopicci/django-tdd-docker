@@ -76,7 +76,7 @@ class MovieViewSet(ViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk, format=None):
+    def destroy(self, request, pk, format=None):
         movie = self.get_object(pk)
         movie.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -91,7 +91,7 @@ class MovieViewSet(ViewSet):
             },
         )
     )
-    def put(self, request, pk, format=None):
+    def update(self, request, pk, format=None):
         movie = self.get_object(pk)
         serializer = MovieSerializer(movie, data=request.data)
         if serializer.is_valid():
