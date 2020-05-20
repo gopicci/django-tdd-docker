@@ -25,10 +25,21 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema"
+}
+
+
+SWAGGER_SETTINGS = {
+    "USE_SESSION_AUTH": False
+}
+
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get("DEBUG", default=0))
 
 if not DEBUG:
+    REST_FRAMEWORK["DEFAULT_RENDERER_CLASSES"] = ("rest_framework.renderers.JSONRenderer",)
     SECURE_HSTS_SECONDS = 3600
     SECURE_CONTENT_TYPE_NOSNIFF = True
     SECURE_BROWSER_XSS_FILTER = True
@@ -41,7 +52,10 @@ if not DEBUG:
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
     SECURE_REFERRER_POLICY = "same-origin"
     REST_FRAMEWORK = {
-        "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",)
+        "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",
+                                     "renderers.OpenAPIRenderer",
+                                     "renderers.SwaggerUIRenderer",
+                                     )
     }
 
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
@@ -57,6 +71,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "drf_yasg",
     "movies",
 ]
 
