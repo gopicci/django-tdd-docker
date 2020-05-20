@@ -10,9 +10,4 @@ issues from testdriven.io:
 -  black conflicts with flake8, the latest expecting a space after the comma after the latest element of a list,
 contrary to the first
 E231 missing whitespace after ','
-- gitlab-ci config database url variable is different than django settings one
-- gitlab-ci test failing without migrations
 
-
-
-image size, compressed pre multistage 150
